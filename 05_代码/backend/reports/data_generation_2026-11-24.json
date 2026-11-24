@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "mode": "incremental",
+  "seed": 42,
+  "days": 90,
+  "counts": {
+    "user_info": 20000,
+    "product_info": 500,
+    "channel_info": 20,
+    "order_info": 80000
+  },
+  "dirty_orders": 8000,
+  "dirty_types": {
+    "duplicate_order": 2000,
+    "null_channel": 2000,
+    "negative_amount": 2000,
+    "orphan_user": 2000
+  },
+  "start_date": "2026-08-27",
+  "end_date": "2026-11-24"
+}

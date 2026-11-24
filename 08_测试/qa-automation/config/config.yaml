@@ -1,0 +1,17 @@
+# 测试环境配置 —— 本项目为非 HTTP 数仓 ETL（MySQL 存储过程 + Python 脚本），无 token/账号体系。
+# DB 连接信息不写死，从 05_代码/backend/.env 读取（由 dw_common.load_environment 加载）。
+env: local
+
+db:
+  host: ${MYSQL_HOST:-127.0.0.1}
+  port: ${MYSQL_PORT:-53306}
+  database: dw
+  # 真实账号走 .env；CI 无 DB，集成用例 skip
+  connect_timeout: 10
+
+# L2/L3/L4 集成测试操作的干净基线日（第 7.5 步已重置，11-28 为可复现基线日，幂等重跑不改变结果）
+baseline_date: "2026-11-28"
+baseline_gmv: 397131.32   # 11-28 ads_kpi_daily GMV，第 7 步 L-01 已复现
+
+# 分层幂等 / 对账容差（金额保留两位小数，浮点对账允许 0.01 误差）
+tolerance: 0.01

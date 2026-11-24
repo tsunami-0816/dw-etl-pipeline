@@ -1,0 +1,49 @@
+# step4 任务拆解与开发规范输入卡
+step: 4
+project: dw-etl-pipeline
+updated_at: 2026-11-23
+sources:
+  - 01_项目基线说明书.md
+  - 02_架构设计/第一轮技术架构设计文档.md
+  - 02_架构设计/第二轮技术架构设计文档.md
+  - 03_评审报告/第一轮架构评审报告.md
+arch_ref: 02_架构设计/第一轮技术架构设计文档.md
+tasks:
+  - {task_id: T01, desc: 环境建库与账号, risk: 关键, criterion_ref: C10}
+  - {task_id: T02, desc: 源库与 ODS 建表, risk: 关键, criterion_ref: C02}
+  - {task_id: T03, desc: DWD/DIM/SCD2/分区索引, risk: 关键, criterion_ref: C02}
+  - {task_id: T04, desc: DWS/ADS/元数据治理表, risk: 关键, criterion_ref: C02}
+  - {task_id: T05, desc: 90 天固定种子与 3% 脏数据造数, risk: 高, criterion_ref: C01}
+  - {task_id: T06, desc: ODS 存储过程与运行日志, risk: 关键, criterion_ref: C08}
+  - {task_id: T07, desc: DWD 清洗/SCD2/游标/P0 阻断, risk: 关键, criterion_ref: C04}
+  - {task_id: T08, desc: DWS/ADS 聚合与窗口指标, risk: 关键, criterion_ref: C07}
+  - {task_id: T09, desc: 总控幂等/并发锁/失败层重跑, risk: 关键, criterion_ref: C03}
+  - {task_id: T10, desc: Spark 90 天重算/stg/upsert, risk: 高, criterion_ref: C05}
+  - {task_id: T11, desc: 逐日全外连接对账与报告, risk: 高, criterion_ref: C05}
+  - {task_id: T12, desc: pandas 分块降级通道, risk: 高, criterion_ref: C05}
+  - {task_id: T13, desc: 12 指标字典与字段级血缘, risk: 中, criterion_ref: C07}
+  - {task_id: T14, desc: 5 类质量规则双实现与报告, risk: 高, criterion_ref: C04}
+  - {task_id: T15, desc: Q1/Q2/Q3 优化与实测取证, risk: 高, criterion_ref: C06}
+  - {task_id: T16, desc: 日调度/日报/退出码/run_summary, risk: 高, criterion_ref: C10}
+  - {task_id: T17, desc: 区间补数与失败重试, risk: 高, criterion_ref: C08}
+  - {task_id: T18, desc: 部署启动与 5 类运维手册, risk: 关键, criterion_ref: C10}
+  - {task_id: T19, desc: 报告目录与实测证据集, risk: 中, criterion_ref: C10}
+  - {task_id: T20, desc: pytest 至少 20 条全绿, risk: 高, criterion_ref: C09}
+scope:
+  files_in_scope:
+    - 04_任务拆解与开发规范.md
+    - 04_任务拆解与开发规范.md.input_card.yaml
+    - _设计实施映射表.md
+    - _项目状态.md
+    - 05_代码/backend/input_card.yaml
+  out_of_scope:
+    - 01_项目基线说明书.md
+    - 02_架构设计/**
+    - 03_评审报告/**
+    - 05_代码/backend/sql/**
+    - 05_代码/backend/scripts/**
+    - 05_代码/frontend/**
+limits:
+  max_files: 6
+  max_attempts: 2
+  timeout_min: 45

@@ -1,0 +1,40 @@
+{
+  "_comment": "本项目为非 HTTP 数仓 ETL（MySQL 存储过程 + Python/Spark 脚本 + 数据表），无 HTTP 接口。scripts/p0_regression_test.py 的 HTTP 格式不适用；P0 回归统一通过 `cd 08_测试/qa-automation && python -m pytest -m p0 -q` 执行（实测 4 passed, 49 deselected）。",
+  "runner": "pytest -m p0",
+  "baseline_date": "2026-11-28",
+  "cases": [
+    {
+      "id": "P0-001",
+      "name": "sp_etl_daily 正向出数：干净基线日返回 success/skipped，分层行数单调，ADS 产出 GMV 且复现基线值 397131.32",
+      "layer": "L2",
+      "node_id": "testcases/l2_sql_integration/test_sp_integration.py::test_sp_etl_daily_success",
+      "verify": "pytest -m p0",
+      "status": "passed"
+    },
+    {
+      "id": "P0-002",
+      "name": "sp_etl_daily 幂等：同日连跑两次，ADS GMV 与各层出数完全一致（不翻倍、不漂移）",
+      "layer": "L2",
+      "node_id": "testcases/l2_sql_integration/test_sp_integration.py::test_sp_etl_daily_idempotent",
+      "verify": "pytest -m p0",
+      "status": "passed"
+    },
+    {
+      "id": "P0-003",
+      "name": "P0 治理阻断：隔离日注入 100% 空渠道 → sp_etl_daily blocked，DWD 事务回滚不写（0 行），dq_report/dq_alert 留 P0 证据",
+      "layer": "L2",
+      "node_id": "testcases/l2_sql_integration/test_sp_integration.py::test_sp_p0_blocks_downstream",
+      "verify": "pytest -m p0",
+      "status": "passed",
+      "evidence_step7": "07_联调 evidence/evid_03_*.log（注入→exit2 blocked→治理证据保留→修复+重置ODS→exit0 success 全生命周期）"
+    },
+    {
+      "id": "P0-004",
+      "name": "E2E 主路径：run_daily --date 基线日 exit 0，分层单调 + 一级指标产出，integ_assert 跨层一致性（dwd→dws→ads + SCD2 版本链）exit 0",
+      "layer": "L4",
+      "node_id": "testcases/l4_e2e/test_e2e.py::test_full_pipeline_e2e",
+      "verify": "pytest -m p0",
+      "status": "passed"
+    }
+  ]
+}

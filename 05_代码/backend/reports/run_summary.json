@@ -1,0 +1,14 @@
+{
+  "batch_id": "B20261128-201423",
+  "dt": "2026-11-28",
+  "status": "skipped",
+  "layers": {
+    "ODS": 2601,
+    "DWD": 884,
+    "DWS": 31,
+    "ADS": 55,
+    "ALL": 3571,
+    "RECONCILE": 0
+  },
+  "exit_code": 0
+}

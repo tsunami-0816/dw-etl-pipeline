@@ -1,0 +1,4 @@
+# dw-etl-pipeline · Spark 可选依赖（体积大，单独安装）
+# 仅当需要运行 spark/spark_rebuild_dws.py 时安装；主链路不依赖它。
+# 安装：py -3.11 -m pip install -r requirements-spark.txt
+pyspark==3.5.3

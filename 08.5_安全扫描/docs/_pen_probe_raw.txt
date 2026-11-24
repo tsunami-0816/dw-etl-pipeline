@@ -1,0 +1,13 @@
+﻿PASS | 日期注入拒绝 2026-11-01' OR '1'=' | "2026-11-01' OR '1'='1" → ValueError: 日期必须为 YYYY-MM-DD 且真实存在: "2026-11-01' OR '1'='1"
+PASS | 日期注入拒绝 2026-11-01; DROP TAB | '2026-11-01; DROP TABLE dw.dws_daily_channel' → ValueError: 日期必须为 YYYY-MM-DD 且真实存在: '2026-11-01; DROP TABLE dw.dws_daily_channel'
+PASS | 日期注入拒绝 2026-13-01 | '2026-13-01' → ValueError: 日期必须为 YYYY-MM-DD 且真实存在: '2026-13-01'
+PASS | SQL 渲染拒绝不安全口令 p'w"d;DROP | 'p\'w"d;DROP' → ValueError: MYSQL_PASSWORD 缺失或含不安全字符；密码长度须为 8～128
+PASS | SQL 渲染拒绝不安全口令 a\b | 'a\\b' → ValueError: MYSQL_PASSWORD 缺失或含不安全字符；密码长度须为 8～128
+PASS | SQL 渲染拒绝不安全口令 short | 'short' → ValueError: MYSQL_PASSWORD 缺失或含不安全字符；密码长度须为 8～128
+PASS | run_daily 拒绝注入日期 | exit=3 stderr=日期必须为 YYYY-MM-DD 且真实存在: "2026-11-01' OR '1'='1"
+PASS | backfill 拒绝注入日期 | exit=1 stderr=backfill precheck failed: ValueError: 日期必须为 YYYY-MM-DD 且真实存在: "2026-11-01'--"
+PASS | gen_data 拒绝非法枚举 | exit=2
+PASS | 端口暴露面核查 | docker-compose 将 MySQL 映射到 0.0.0.0:53306（本机开发用，已记 P2 加固建议）
+PASS | .env 已被 .gitignore 忽略 | 存在 .env 且命中忽略规则
+
+合计 11 项，PASS 11，FAIL 0

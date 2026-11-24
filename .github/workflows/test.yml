@@ -1,0 +1,28 @@
+name: test
+
+# 第 8 步 CI（step8 只要求本地 collect-only 绿；远程 Actions 跑通与 README badge 归 step10.5 建仓后回填）。
+# 本项目非 HTTP（SQL 存储过程 + Python 脚本），无 token/账号；CI 无 MySQL 中间件，
+# 故只跑 collect-only（语法+收集）+ L1 单元测试（无 DB 依赖）；L2/L3/L4 集成/E2E 在本机有 DB 时跑，CI 自动 skip。
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 08_测试/qa-automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Collect-only（语法 + 用例收集校验，无需 DB）
+        run: pytest --collect-only -q
+      - name: Run L1 unit tests（无 DB 依赖，CI 可跑）
+        run: pytest -m "not integration and not l2 and not l3 and not l4" -q

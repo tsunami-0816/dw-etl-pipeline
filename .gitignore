@@ -1,0 +1,57 @@
+# .gitignore · dw-etl-pipeline
+# 由 .gitignore.template 复制；运行时数据不入库，产物（含 reports/）保留为本地证据。
+
+# ===== 运行数据 =====
+.env
+.env.local
+.env.*.local
+.checkpoint/
+.gate_observations/
+runtime/data/
+runtime/*.db
+*.log
+logs/
+
+# ===== 依赖 =====
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# ===== 构建产物 =====
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+allure-report/
+allure-results/
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 数据库数据 =====
+*.db
+*.sqlite
+*.sqlite3
+# 10.7 本地全量备份（可凭 init SQL + 固定种子重建，不入库）
+10_交付/db_backup/
+
+# ===== 临时文件 =====
+*.tmp
+*.bak
+.cache/

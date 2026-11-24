@@ -1,0 +1,14 @@
+﻿待审计依赖 7 个：PyMySQL==1.1.1, SQLAlchemy==2.0.36, pandas==2.2.3, PyYAML==6.0.2, python-dotenv==1.2.2, pytest==8.3.3, pyspark==3.5.3
+✅ PyMySQL==1.1.1 无已知漏洞
+✅ SQLAlchemy==2.0.36 无已知漏洞
+✅ pandas==2.2.3 无已知漏洞
+✅ PyYAML==6.0.2 无已知漏洞
+✅ python-dotenv==1.2.2 无已知漏洞
+❌ pytest==8.3.3 命中 2 条
+❌ pyspark==3.5.3 命中 2 条
+
+命中明细：
+  - pytest==8.3.3 | CVE-2025-71176 | 修复版本: ['9.0.3'] | pytest has vulnerable tmpdir handling
+  - pytest==8.3.3 | CVE-2025-71176 | 修复版本: ['9.0.3'] | pytest has vulnerable tmpdir handling
+  - pyspark==3.5.3 | CVE-2026-32773 | 修复版本: ['3.5.8'] | Apache Spark History Server allows stored cross-site scripting through unescaped application names
+  - pyspark==3.5.3 | CVE-2026-32773 | 修复版本: ['3.5.8'] | 

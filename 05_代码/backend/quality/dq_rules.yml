@@ -1,0 +1,34 @@
+# dq_rules.yml · 5 类质量规则（D-34）
+# 由 quality/run_rules.py 加载校验：缺规则/非法阈值拒绝启动；正常造数 3% 脏数据不触发 P0。
+version: 1
+rules:
+  DQ01:
+    name: 渠道空值率
+    table: ods_order
+    base_level: P2
+    p0_level: P0
+    p0_threshold: 0.05      # 空渠道率 > 5% → P0 阻断
+    description: 空渠道订单占比；超过阈值阻断下游，否则归 0 并打标。
+  DQ02:
+    name: 订单号重复率
+    table: ods_order
+    base_level: P1
+    p0_level: P0
+    p0_threshold: 0.05      # 重复率 > 5% → P0 阻断
+    description: (总行数 - 去重订单号数) / 总行数；超过阈值阻断，否则去重并记录被丢行。
+  DQ03:
+    name: 金额为负
+    table: ods_order
+    level: P1
+    description: 负金额订单；置 0 并打 dq_flag，保留明细。
+  DQ04:
+    name: 孤儿用户
+    table: dwd_order_detail
+    level: P1
+    description: 订单用户不在用户画像中；置 -1 哨兵维并留痕。
+  DQ05:
+    name: 日环比突增突降
+    table: ads_kpi_daily
+    level: P2
+    threshold: 0.5         # |今日 GMV - 昨日 GMV| / 昨日 > 50% → 告警，不阻断
+    description: GMV 日环比波动超阈值；仅记录告警，不阻断下游。

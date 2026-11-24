@@ -1,0 +1,21 @@
+﻿=== CVE-2026-28684 ===
+summary: python-dotenv: Symlink following in set_key allows arbitrary file overwrite via cross-device rename fallback
+severity: [{'type': 'CVSS_V3', 'score': 'CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:H'}]
+database_specific: {'cwe_ids': ['CWE-59', 'CWE-61'], 'osv_generated_from': 'https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/28xxx/CVE-2026-28684.json', 'cna_assigner': 'GitHub_M'}
+aliases: ['GHSA-mf9w-mj56-hr94', 'PYSEC-2026-2270']
+package: None | ranges: [{'type': 'GIT', 'repo': 'https://github.com/theskumar/python-dotenv', 'events': [{'introduced': '0'}, {'fixed': '36004e0e34be7665ff2b11a8a4005144f76f176d'}, {'fixed': '790c5c02991100aa1bf41ee5330aca75edc51311'}], 'database_specific': {'extracted_events': [{'source': 'CPE_RANGE', 'cpe': 'cpe:2.3:a:saurabh-kumar:python-dotenv:*:*:*:*:*:python:*:*', 'range': [{'introduced': '0'}, {'fixed': '1.2.2'}]}, {'range': [{'fixed': '790c5c02991100aa1bf41ee5330aca75edc51311'}], 'source': 'REFERENCES_COMMIT'}, {'original_tag': 'v1.2.2', 'range': [{'fixed': '36004e0e34be7665ff2b11a8a4005144f76f176d'}], 'source': 'REFERENCES_TAG'}]}}]
+
+=== CVE-2025-71176 ===
+summary: None
+severity: [{'type': 'CVSS_V3', 'score': 'CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L'}]
+database_specific: {'cna_assigner': 'mitre', 'cwe_ids': ['CWE-379'], 'osv_generated_from': 'https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/71xxx/CVE-2025-71176.json'}
+aliases: ['GHSA-6w46-j5rx-g56g', 'PYSEC-2026-1845']
+package: None | ranges: [{'type': 'GIT', 'repo': 'https://github.com/pytest-dev/pytest', 'events': [{'introduced': '0'}, {'last_affected': '3d10b5148e03eb82b3ee29181dbdc73cf82699e2'}], 'database_specific': {'extracted_events': [{'range': [{'introduced': '0'}, {'last_affected': '9.0.2'}], 'source': 'AFFECTED_FIELD', 'strategy': 'StandardRange'}, {'range': [{'introduced': '0'}, {'last_affected': '9.0.2'}], 'source': 'DESCRIPTION'}]}}]
+
+=== CVE-2026-32773 ===
+summary: Apache Spark: XSS Vulnerability in Spark Web 3.5.4
+severity: [{'type': 'CVSS_V3', 'score': 'CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N'}]
+database_specific: {'osv_generated_from': 'https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/32xxx/CVE-2026-32773.json', 'unresolved_ranges': [{'extracted_events': [{'source': 'AFFECTED_FIELD', 'strategy': 'StandardRange', 'range': [{'introduced': '3.0.0'}, {'fixed': '3.5.8'}]}]}], 'cna_assigner': 'apache', 'cwe_ids': ['CWE-80']}
+aliases: ['BIT-spark-2026-32773', 'GHSA-9437-39hj-3c93', 'PYSEC-2026-3966']
+package: None | ranges: [{'type': 'GIT', 'repo': 'https://github.com/apache/spark', 'events': [{'introduced': '3fdfce3120f307147244e5eaf46d61419a723d50'}, {'fixed': '5a48a37b2dbd7b51e3640cd1d947438459556cc6'}], 'database_specific': {'extracted_events': [{'cpe': 'cpe:2.3:a:apache:spark:*:*:*:*:*:*:*:*', 'range': [{'introduced': '3.0.0'}, {'fixed': '3.5.8'}], 'source': 'CPE_RANGE'}]}}]
+

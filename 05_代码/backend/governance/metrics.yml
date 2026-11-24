@@ -1,0 +1,128 @@
+# metrics.yml · 12 条指标字典（D-32）
+# 每条含：公式、源字段（四级反查）、ADS 落点、责任人；供机器校验 12 项齐全。
+version: 1
+metrics:
+  - code: NEW_USERS
+    name: 新增客户数
+    id: M01
+    level: 一级
+    formula: COUNT(DISTINCT user_id)，register_date = dt
+    source_fields:
+      - dwd_user_profile.register_date
+      - dwd_user_profile.user_id
+      - ods_user.register_time
+      - biz.user_info.register_time
+    ads_target: ads_kpi_daily.kpi_value (kpi_code='NEW_USERS')
+    owner: dw-team
+  - code: GMV
+    name: 成交额
+    id: M02
+    level: 一级
+    formula: SUM(amount)，order_status IN ('paid','refunded')
+    source_fields:
+      - dwd_order_detail.amount
+      - dwd_order_detail.order_status
+      - ods_order.amount
+      - biz.order_info.amount
+    ads_target: ads_kpi_daily.kpi_value (kpi_code='GMV')
+    owner: dw-team
+  - code: REFUND_RATE
+    name: 退款率
+    id: M03
+    level: 一级
+    formula: 退款订单数 / 支付订单数
+    source_fields:
+      - dwd_order_detail.is_refund
+      - dwd_order_detail.order_status
+      - biz.order_info.status
+    ads_target: ads_kpi_daily.kpi_value (kpi_code='REFUND_RATE')
+    owner: dw-team
+  - code: CHANNEL_ROI
+    name: 渠道 ROI
+    id: M04
+    level: 一级
+    formula: gmv / cost
+    source_fields:
+      - dws_daily_channel.gmv
+      - dws_daily_channel.cost
+      - dim_channel.daily_cost
+      - biz.channel_info.daily_cost
+    ads_target: ads_channel_roi.roi
+    owner: dw-team
+  - code: ORDER_CNT
+    name: 订单数
+    id: M05
+    level: 二级
+    formula: COUNT(*)
+    source_fields:
+      - dwd_order_detail.order_no
+    ads_target: ads_channel_daily.orders
+    owner: dw-team
+  - code: PAID_ORDER_CNT
+    name: 支付订单数
+    id: M06
+    level: 二级
+    formula: COUNT(*) WHERE order_status IN ('paid','refunded')
+    source_fields:
+      - dwd_order_detail.order_status
+    ads_target: ads_channel_daily.paid_orders
+    owner: dw-team
+  - code: AOV
+    name: 客单价
+    id: M07
+    level: 二级
+    formula: gmv / paid_orders
+    source_fields:
+      - dws_daily_channel.gmv
+      - dws_daily_channel.paid_orders
+    ads_target: ads_channel_daily.aov
+    owner: dw-team
+  - code: REFUND_ORDER_CNT
+    name: 退款订单数
+    id: M08
+    level: 二级
+    formula: COUNT(*) WHERE is_refund = 1
+    source_fields:
+      - dwd_order_detail.is_refund
+    ads_target: ads_channel_daily.refund_orders
+    owner: dw-team
+  - code: REFUND_AMOUNT
+    name: 退款金额
+    id: M09
+    level: 二级
+    formula: SUM(amount) WHERE is_refund = 1
+    source_fields:
+      - dwd_order_detail.amount
+      - dwd_order_detail.is_refund
+    ads_target: ads_channel_daily.refund_amount
+    owner: dw-team
+  - code: CHANNEL_NEW_USERS
+    name: 渠道新增客户数
+    id: M10
+    level: 二级
+    formula: 按注册渠道 COUNT(DISTINCT user_id)
+    source_fields:
+      - dwd_user_profile.channel_id
+      - dwd_user_profile.register_date
+    ads_target: ads_channel_daily.new_users
+    owner: dw-team
+  - code: CAC
+    name: 渠道获客成本
+    id: M11
+    level: 二级
+    formula: cost / new_users
+    source_fields:
+      - dws_daily_channel.cost
+      - dws_daily_channel.new_users
+    ads_target: ads_channel_roi.cac
+    owner: dw-team
+  - code: CATEGORY_GMV
+    name: 品类销售额
+    id: M12
+    level: 二级
+    formula: SUM(amount) 按 category_id
+    source_fields:
+      - dwd_order_detail.amount
+      - dwd_order_detail.category_id
+    ads_target: ads_category_sales.gmv
+    owner: dw-team
